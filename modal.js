@@ -34,13 +34,11 @@ closeModal.addEventListener('click', function(){
 
 // Validation des formulaires
   // Prénom
-
   prenom.addEventListener('input', function(){
     if (prenom.value < 2){
       labelPrenom.innerHTML = "Prénom <p style='color: red'><b>Veuillez saisir au minimum deux lettres</b></p>";
     } else { 
       console.log("it's ok bb")
     };
-
   })
 
