@@ -14,7 +14,6 @@ const formData = document.querySelectorAll(".formData");
 const bground = document.getElementsByClassName('bground')[0];
 const closeModal = document.getElementsByClassName("close")[0];
 const labelPrenom = document.getElementById("prenom");
-const prenom = document.getElementById("first");
 
 
 // launch modal event
@@ -33,12 +32,38 @@ closeModal.addEventListener('click', function(){
 
 
 // Validation des formulaires
+const form_inscription = document.getElementById("inscription");
+const champ_prenom = document.getElementById("first");
+const champ_nom = document.getElementById("last");
+const champ_email = document.getElementById("email");
+const champ_birthdate = document.getElementById("birthdate");
+
+let form_ok = true;
+
+if(champ_prenom.value.length > 2){
+  form_ok = true;
+} else {
+  alert("Veuillez saisir au minimum deux lettres");
+  form_ok = false;
+}
+
+function validate (event) {
+  if(!form_OK){
+    event.preventDefault();
+  } else {
+    // Code de validation de formulaire
+  }
+}
+
+// form_inscription.addEventListener('submit', validate());
+
+
   // Prénom
-  prenom.addEventListener('input', function(){
-    if (prenom.value < 2){
-      labelPrenom.innerHTML = "Prénom <p style='color: red'><b>Veuillez saisir au minimum deux lettres</b></p>";
-    } else { 
-      console.log("it's ok bb")
-    };
-  })
+  // prenom.addEventListener('input', function(){
+  //   if (prenom.value < 2){
+  //     labelPrenom.innerHTML = "Prénom <p style='color: red; padding: 0'><b>Veuillez saisir au minimum deux lettres</b></p>";
+  //   } else { 
+  //     console.log("it's ok bb")
+  //   };
+  // })
 
