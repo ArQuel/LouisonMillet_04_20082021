@@ -77,7 +77,7 @@
               </div>
               <div
                 class="formData">
-                <label>Nom</label><br>
+                <label id="nom">Nom</label><br>
                 <input
                   class="text-control"
                   type="text"
@@ -87,7 +87,7 @@
               </div>
               <div
                 class="formData">
-                <label>E-mail</label><br>
+                <label id="email">E-mail</label><br>
                 <input
                   class="text-control"
                   type="email"
@@ -107,10 +107,10 @@
               </div>
               <div
                 class="formData">
-                <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
+                <label id="concours">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
               </div>
-              <p class="text-label">Quelles villes ?</p>
+              <p class="text-label" id="villes">Quelles villes ?</p>
               <div
                 class="formData">
                 <input
@@ -189,7 +189,7 @@
                   id="checkbox1"
                   checked
                 />
-                <label class="checkbox2-label" for="checkbox1" required>
+                <label class="checkbox2-label" for="checkbox1" id="conditions" required>
                   <span class="checkbox-icon"></span>
                   J'ai lu et accepté les conditions d'utilisation.
                 </label>
@@ -206,6 +206,7 @@
                 type="submit"
                 class="button"
                 value="C'est parti"
+                id="submit_form"
               />
             </form>
           </div>
