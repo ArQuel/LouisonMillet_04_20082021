@@ -68,7 +68,7 @@ img {
   display: none;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1128px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -76,7 +76,7 @@ img {
   }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1128px) {
   .topnav.responsive {position: relative;}
   .topnav.responsive .icon {
     position: absolute;
@@ -449,7 +449,6 @@ input[data-error]::after {
 }
 .btn-signup {
   outline: none;
-  text-transform: capitalize;
   font-size: 1.3rem;
   padding: 15px 23px;
   margin: 0;
@@ -463,6 +462,7 @@ input[data-error]::after {
   height: 100%;
   display: block;
   padding: 0;
+  object-fit: cover;
 }
 .copyrights {
   color: #fe142f;
@@ -479,7 +479,7 @@ footer {
   padding-right: 2vw;
   margin: 0 20px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 980px) {
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -498,6 +498,7 @@ footer {
   .hero-headline {
     font-size: 4.5rem;
     white-space: normal;
+    text-align: center;
   }
   .hero-text {
     width: unset;

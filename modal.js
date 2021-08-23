@@ -34,6 +34,8 @@ const location6 = document.getElementById('location6');
 const label_villes = document.getElementById('villes');
 const label_conditions = document.getElementById('conditions');
 const checkbox_conditions = document.getElementById('checkbox1');
+const label_birthdate = document.getElementById('label_birthdate');
+const birthdate = document.getElementById('birthdate');
 
 
 // launch modal event
@@ -67,43 +69,49 @@ function validate(){
   if(champ_prenom.value.length > 2 && champ_prenom.value != ""){
     form_ok = true;
   } else {
-    label_prenom.innerHTML = "Prénom <p style='color: red; padding: 0'><b>Veuillez saisir au minimum deux lettres</b></p>";
+    label_prenom.innerHTML = "Prénom <p style='color: red; padding: 0'><b>Veuillez entrer 2 caractères ou plus</b></p>";
     form_ok = false;
   }
   if(champ_nom.value.length > 2 && champ_nom.value != ""){
     form_ok = true;
   } else {
-    label_nom.innerHTML = "Nom <p style='color: red; padding: 0'><b>Veuillez saisir au minimum deux lettres</b></p>";
+    label_nom.innerHTML = "Nom <p style='color: red; padding: 0'><b>Veuillez entrer 2 caractères ou plus</b></p>";
     form_ok = false;
   }
   if(verif_mail.test(verif_champ_mail.value) && champ_email.value != ""){
     form_ok = true;
   } else {
-    label_email.innerHTML = "E-mail <p style='color: red; padding: 0'><b>Veuillez saisir une adresse mail valide</b></p>";
+    label_email.innerHTML = "E-mail <p style='color: red; padding: 0'><b>Veuillez saisir une adresse mail valide.</b></p>";
     form_ok = false;
   }
   if(isNaN(champ_concours.value) || champ_concours.value == ""){
     form_ok = false;
-    label_concours.innerHTML = "À combien de tournois GameOn avez-vous déjà participé ? <p style='color: red; padding: 0'><b>Veuillez saisir un nombre</b></p>";
+    label_concours.innerHTML = "À combien de tournois GameOn avez-vous déjà participé ? <p style='color: red; padding: 0'><b>Veuillez saisir un nombre.</b></p>";
   } else {
     form_ok = true;
+  }
+  if (birthdate.value != ""){
+    form_ok = true;
+  } else {
+    form_ok = false;
+    label_birthdate.innerHTML = "Date de naissance <p style='color: red; padding: 0'><b>Veuillez saisir votre date de naissance</b></p> "
   }
   if(location1.checked || location2.checked || location3.checked || location4.checked || location5.checked || location6.checked){
     form_ok = true;
   } else {
     form_ok = false;
-    label_villes.innerHTML = "Quelles villes ? <p style='color: red; padding: 0'><b>Veuillez choisir une ville</b></p>";
+    label_villes.innerHTML = "Quelles villes ? <p style='color: red; padding: 0'><b>Vous devez choisir une ville.</b></p>";
   }
   if(checkbox_conditions.checked){
     form_ok = true;
   } else {
     form_ok = false;
-    label_conditions.innerHTML = "<input class='checkbox-input' type='checkbox' id='checkbox1'  checked /> <label class='checkbox2-label' style='margin-left: 0px' for='checkbox1' id='conditions' required> <span class='checkbox-icon'></span> J'ai lu et accepté les conditions d'utilisation. </label> <p style='color: red; padding: 0'><b>Veuillez cocher la case ci-dessus</b></p>";
+    label_conditions.innerHTML = "<input class='checkbox-input' type='checkbox' id='checkbox1'  checked /> <label class='checkbox2-label' style='margin-left: 0px' for='checkbox1' id='conditions' required> <span class='checkbox-icon'></span> J'ai lu et accepté les conditions d'utilisation. </label> <p style='color: red; padding: 0'><b>Vous devez vérifier que vous acceptez les termes et conditions.</b></p>";
   }
   if(form_ok == true){
-    alert('tout est bon')
+    alert('Test tout est bon')
   } else {
-    alert('Vérifiez les champs')
+    alert('Test Vérifiez les champs')
   }
 }
 
