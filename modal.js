@@ -35,6 +35,10 @@ close_modal.addEventListener('click', function(){
 // Validation des formulaires
 let verifFirst = false;
 let verifLast = false;
+let verifEmail = false;
+let verifBirth = false;
+let verifQuantity = false;
+let verifCheckBoxRequired = false;
 
 function checkTextInput(input, tailleMax, errorMessage){
   let isOk = input.value.length >= tailleMax
@@ -47,10 +51,10 @@ function checkTextInput(input, tailleMax, errorMessage){
   return isOk;
 }
 
-let regEmail = /^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$/g;
 
-function checkEmailInput(input, regEmail, errorMessage){
-  let isOk = input.value != regEmail
+function checkEmailInput(input, errorMessage){
+  const regEmail = /^[\w\-\+]+(\.[\w\-]+)*@[\w\-]+(\.[\w\-]+)*\.[\w\-]{2,4}$/;
+  let isOk = regEmail.test(input.value);
   if (!isOk) {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
@@ -60,39 +64,82 @@ function checkEmailInput(input, regEmail, errorMessage){
   return isOk;
 }
 
+function checkBirthInput(input, errorMessage){
+  let isOk = isNaN(input.value);
+  if (isOk) {
+    input.parentNode.dataset.error = errorMessage;
+    input.parentNode.dataset.errorVisible = true;
+  } else {
+    input.parentNode.dataset.errorVisible = false;
+  }
+  return isOk;
+}
+
+function checkQuantityInput(input, errorMessage){
+  let isOk = isNaN(input.value);
+  if (isOk) {
+    input.parentNode.dataset.error = errorMessage;
+    input.parentNode.dataset.errorVisible = true;
+  } else {
+    input.parentNode.dataset.errorVisible = false;
+  }
+  return isOk;
+}
+
+function verifyCheckBox(inputName, errorMessage){
+  let inputs = Array.from(document.querySelectorAll("input[name='location']"))
+  for (let index = 0; index < inputs.length ; index ++){
+    const input = inputs[index];
+    if(input.checked) {
+    return true;
+    }
+  }
+  inputName.dataset.error = errorMessage;
+  inputName.dataset.errorVisible = true;
+  return false;
+}
+
+function verifyCheckBoxRequired(inputName, errorMessage){
+  let inputs = Array.from(document.querySelectorAll("input[name='checkbox']"))
+  console.log(inputs);
+  for (let index = 0; index < inputs.length ; index ++){
+    const input = inputs[index];
+    if(input.checked) {
+    return true;
+    }
+  }
+  alert("Veuillez cocher la case des conditions d'utilisations")
+  return false;
+}
 
 document.querySelector('#first').addEventListener("blur", (e) => {verifFirst = checkTextInput(e.target, 2, "Le prenom doit avoir 2 caractères ou plus")})
 
 document.querySelector('#last').addEventListener("blur", (e) => {verifLast = checkTextInput(e.target, 2, "Le nom doit avoir 2 caractères ou plus")})
 
-document.querySelector('#email').addEventListener("blur", (e) => {verifEmail = checkEmailInput(e.target, regEmail, "Veuillez entrer un mail valide")})
+document.querySelector('#email').addEventListener("blur", (e) => {verifEmail = checkEmailInput(e.target, "Veuillez entrer un mail valide")})
+
+document.querySelector('#birthdate').addEventListener("blur", (e) => {verifBirth = checkBirthInput(e.target, "Veuillez saisir votre date de naissance")})
+
+document.querySelector('#quantity').addEventListener("blur", (e) => {verifQuantity = checkQuantityInput(e.target, "Veuillez saisir un nombre")})
+
 
 
 document.querySelector('form').addEventListener('submit', (e) => validate(e))
 
 
+
+
 function validate(event) {
   event.preventDefault();
-  let isCheckBoxOk = verifyCheckBox('location', 'Veuillez cocher une ville');
-  if(verifFirst && verifLast && isCheckBoxOk){
+  let isCheckBoxOk = verifyCheckBox(document.getElementById('parent-radio'), 'Veuillez cocher une ville');
+  let isCheckBoxRequiredOk = verifyCheckBoxRequired(document.getElementById('checkbox1'), 'Veuillez cocher la case')
+  if(verifFirst && verifLast && isCheckBoxOk && verifEmail /* && verifBirth && verifQuantity*/ && isCheckBoxRequiredOk){
     alert("validé");
+  } else {
+    alert('Non validé');
   }
 }
 
-function verifyCheckBox(inputName, errorMessage){
-  let inputs = Array.from(document.querySelectorAll("input[name='location']"))
-  console.log(inputs);
-  for (let index = 0; index < inputs.length ; index ++){
-    const input = inputs[index];
-    console.log(input.value);
-    if(input.checked) {
-     console.log(input.value, "checked")
-    return true;
-    }
-  }
-  inputName.parentNode.dataset.error = errorMessage;
-  inputName.parentNode.dataset.errorVisible = true;
-  return false;
-}
+
 
 
