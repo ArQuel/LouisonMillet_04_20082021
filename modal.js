@@ -42,7 +42,7 @@ let verifCheckBoxRequired = false;
 
 function checkTextInput(input, tailleMax, errorMessage){
   let isOk = input.value.length >= tailleMax
-  if (!isOk) {
+  if (!isOk || input.value == "") {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
   } else {
@@ -55,7 +55,7 @@ function checkTextInput(input, tailleMax, errorMessage){
 function checkEmailInput(input, errorMessage){
   const regEmail = /^[\w\-\+]+(\.[\w\-]+)*@[\w\-]+(\.[\w\-]+)*\.[\w\-]{2,4}$/;
   let isOk = regEmail.test(input.value);
-  if (!isOk) {
+  if (!isOk || input.value == "") {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
   } else {
@@ -66,7 +66,7 @@ function checkEmailInput(input, errorMessage){
 
 function checkBirthInput(input, errorMessage){
   let isOk = isNaN(input.value);
-  if (isOk) {
+  if (!isOk || input.value == "") {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
   } else {
@@ -76,8 +76,10 @@ function checkBirthInput(input, errorMessage){
 }
 
 function checkQuantityInput(input, errorMessage){
-  let isOk = isNaN(input.value);
-  if (isOk) {
+  const regNumber = /^[0-9]+$/;
+  let isOk = regNumber.test(input.value);
+  console.log(input.value)
+  if (!isOk || input.value == "") {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
   } else {
@@ -108,6 +110,8 @@ function verifyCheckBoxRequired(inputName, errorMessage){
     return true;
     }
   }
+  let errorCheck = document.querySelector('.errorCheck')
+  errorCheck.style.color = 'red';
   alert("Veuillez cocher la case des conditions d'utilisations")
   return false;
 }
@@ -122,18 +126,13 @@ document.querySelector('#birthdate').addEventListener("blur", (e) => {verifBirth
 
 document.querySelector('#quantity').addEventListener("blur", (e) => {verifQuantity = checkQuantityInput(e.target, "Veuillez saisir un nombre")})
 
-
-
 document.querySelector('form').addEventListener('submit', (e) => validate(e))
-
-
-
 
 function validate(event) {
   event.preventDefault();
   let isCheckBoxOk = verifyCheckBox(document.getElementById('parent-radio'), 'Veuillez cocher une ville');
   let isCheckBoxRequiredOk = verifyCheckBoxRequired(document.getElementById('checkbox1'), 'Veuillez cocher la case')
-  if(verifFirst && verifLast && isCheckBoxOk && verifEmail /* && verifBirth && verifQuantity*/ && isCheckBoxRequiredOk){
+  if(verifFirst && verifLast && isCheckBoxOk && verifEmail && verifBirth && verifQuantity && isCheckBoxRequiredOk){
     alert("validé");
   } else {
     alert('Non validé');
