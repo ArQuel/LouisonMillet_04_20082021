@@ -22,7 +22,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-
+  reinitInputs();
 };
 
 
@@ -116,6 +116,17 @@ function verifyCheckBoxRequired(inputName, errorMessage){
   return false;
 }
 
+function reinitInputs(){
+  document.querySelector("input[name='first']").value = "";
+  document.querySelector("input[name='last']").value = "";
+  document.querySelector("input[name='email']").value = "";
+  document.querySelector("input[name='birthdate']").value = "";
+  document.querySelector("input[name='quantity']").value = "";
+  document.querySelector("input[name='location']").checked = false;
+  // let inputs = document.querySelector(".formData");
+  // inputs.dataset.errorVisible = false;
+}
+
 document.querySelector('#first').addEventListener("blur", (e) => {verifFirst = checkTextInput(e.target, 2, "Le prenom doit avoir 2 caractères ou plus")})
 
 document.querySelector('#last').addEventListener("blur", (e) => {verifLast = checkTextInput(e.target, 2, "Le nom doit avoir 2 caractères ou plus")})
@@ -134,6 +145,7 @@ function validate(event) {
   let isCheckBoxRequiredOk = verifyCheckBoxRequired(document.getElementById('checkbox1'), 'Veuillez cocher la case')
   if(verifFirst && verifLast && isCheckBoxOk && verifEmail && verifBirth && verifQuantity && isCheckBoxRequiredOk){
     alert("validé");
+    reinitInputs();
   } else {
     alert('Non validé');
   }

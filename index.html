@@ -106,7 +106,8 @@
               <div
                 class="formData">
                 <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
-                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
+                <!-- Rajout de onkeyDown afin de ne pas accepter les eE => Exponentiel -->
+                <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99" onkeydown="javascript: return event.keyCode == 69 ? false : true">
               </div>
               <p class="text-label" id="villes">Quelles villes ?</p>
               <div id="parent-radio"
