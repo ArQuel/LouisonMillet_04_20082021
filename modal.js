@@ -77,7 +77,6 @@ function checkBirthInput(input, errorMessage){
 function checkQuantityInput(input, errorMessage){
   const regNumber = /^[0-9]+$/;
   let isOk = regNumber.test(input.value);
-  console.log(input.value)
   if (!isOk || input.value == "") {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
@@ -102,7 +101,6 @@ function verifyCheckBox(inputName, errorMessage){
 
 function verifyCheckBoxRequired(inputName, errorMessage){
   let inputs = Array.from(document.querySelectorAll("input[name='checkbox']"))
-  console.log(inputs);
   for (let index = 0; index < inputs.length ; index ++){
     const input = inputs[index];
     if(input.checked) {
