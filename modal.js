@@ -156,6 +156,10 @@ function validateMessage(){
   })
 }
 
+bground.addEventListener('click', function(){
+  bground.style.display = 'none';
+})
+
 document.querySelector('#first').addEventListener("blur", (e) => {verifFirst = checkTextInput(e.target, 2, "Le prenom doit avoir 2 caractères ou plus")})
 
 document.querySelector('#last').addEventListener("blur", (e) => {verifLast = checkTextInput(e.target, 2, "Le nom doit avoir 2 caractères ou plus")})
