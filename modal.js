@@ -22,7 +22,6 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
-  reinitInputs();
 };
 
 
@@ -65,7 +64,8 @@ function checkEmailInput(input, errorMessage){
 }
 
 function checkBirthInput(input, errorMessage){
-  let isOk = isNaN(input.value);
+  let date = Date.parse(input.value)
+  let isOk = !isNaN(date);
   if (!isOk || input.value == "") {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
@@ -107,6 +107,8 @@ function verifyCheckBoxRequired(inputName, errorMessage){
   for (let index = 0; index < inputs.length ; index ++){
     const input = inputs[index];
     if(input.checked) {
+    let errorCheck = document.querySelector('.errorCheck')
+    errorCheck.style.color = 'inherit';
     return true;
     }
   }
@@ -123,8 +125,35 @@ function reinitInputs(){
   document.querySelector("input[name='birthdate']").value = "";
   document.querySelector("input[name='quantity']").value = "";
   document.querySelector("input[name='location']").checked = false;
-  // let inputs = document.querySelector(".formData");
-  // inputs.dataset.errorVisible = false;
+  let errorCheck = document.querySelector('.errorCheck')
+  errorCheck.style.color = 'inherit';
+  let inputs = Array.from(document.querySelectorAll(".formData"));
+  inputs.forEach(input => {
+  input.dataset.errorVisible = false; 
+  })
+}
+
+function validateMessage(){
+  let formulaire = document.querySelector('#validation');
+  formulaire.style.display = 'none';
+  let valide = document.createElement('p');
+  let contentbg = document.querySelector('.modal-body')
+  contentbg.appendChild(valide)
+  valide.textContent = "Votre inscription a été prise en compte"
+  valide.style.fontSize = '25px';
+  valide.style.color = 'white';
+  valide.style.fontWeight = "bold";
+  valide.style.display = 'block'
+  valide.style.textAlign = 'center'
+  valide.style.padding = "20px"
+  let button_back = document.createElement('div')
+  button_back.className = 'button btn-submit';
+  button_back.textContent = "Retour";
+  button_back.style.width = "50%";
+  contentbg.appendChild(button_back);
+  button_back.addEventListener("click", function(){
+    bground.style.display = 'none';
+  })
 }
 
 document.querySelector('#first').addEventListener("blur", (e) => {verifFirst = checkTextInput(e.target, 2, "Le prenom doit avoir 2 caractères ou plus")})
@@ -144,10 +173,10 @@ function validate(event) {
   let isCheckBoxOk = verifyCheckBox(document.getElementById('parent-radio'), 'Veuillez cocher une ville');
   let isCheckBoxRequiredOk = verifyCheckBoxRequired(document.getElementById('checkbox1'), 'Veuillez cocher la case')
   if(verifFirst && verifLast && isCheckBoxOk && verifEmail && verifBirth && verifQuantity && isCheckBoxRequiredOk){
-    alert("validé");
     reinitInputs();
+    validateMessage();
   } else {
-    alert('Non validé');
+    alert('Veuillez remplir les champs correctement');
   }
 }
 
