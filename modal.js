@@ -12,7 +12,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const bground = document.getElementsByClassName('bground')[0];
 const close_modal = document.getElementsByClassName("close")[0];
-const modalBg = document.getElementsByClassName('modal-body');
 
 
 // launch modal event
@@ -153,9 +152,13 @@ function validateMessage(){
   })
 }
 
-// bground.addEventListener('click', function(){
-//   bground.style.display = 'none';
-// })
+bground.addEventListener('click', (e) => {
+  const modalBg = document.getElementsByClassName('modal-body')[0];
+   if (e.target !== modalBg && !modalBg.contains(e.target)) {
+    bground.style.display = 'none';
+   }
+});
+
 
 
 document.querySelector('#first').addEventListener("blur", (e) => {verifFirst = checkTextInput(e.target, 2, "Le prenom doit avoir 2 caractères ou plus")})
