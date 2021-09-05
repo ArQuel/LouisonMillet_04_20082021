@@ -40,14 +40,16 @@ let verifQuantity = false;
 let verifCheckBoxRequired = false;
 
 function checkTextInput(input, tailleMax, errorMessage){
-  let isOk = input.value.length >= tailleMax
-  if (!isOk || input.value == "") {
+  const regText = /[A-Za-z]/;
+  let isOk = false;
+  if (regText.test(input.value) && input.value.length >= tailleMax) {
+    input.parentNode.dataset.errorVisible = false;
+    return true
+  } else {
     input.parentNode.dataset.error = errorMessage;
     input.parentNode.dataset.errorVisible = true;
-  } else {
-    input.parentNode.dataset.errorVisible = false;
+    return false
   }
-  return isOk;
 }
 
 
